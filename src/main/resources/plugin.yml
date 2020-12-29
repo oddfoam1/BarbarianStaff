@@ -1,0 +1,6 @@
+main: main.oddfoam.barbarianstaff.BarbarianStaff
+name: BarbarianStaff
+version: 1.0
+description: A Optimizable Moderation Plugin!
+commands:
+  staffmode:
