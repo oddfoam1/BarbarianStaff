@@ -12,7 +12,7 @@ import java.util.List;
 public class StaffItems {
 
 
-    public static final ItemStack RANDOM_TELEPORT_ITEM = new ItemBuilder(Material.EYE_OF_ENDER)
+    public static final ItemStack RANDOM_TELEPORT_ITEM = new ItemBuilder(Material.PRISMARINE_SHARD)
             .name(CC.chat("&b&lRandom Teleport"))
             .lore(CC.chat("&7Teleport to a random person on the server."))
             .build();
