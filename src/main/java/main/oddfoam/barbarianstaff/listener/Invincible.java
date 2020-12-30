@@ -1,20 +1,17 @@
 package main.oddfoam.barbarianstaff.listener;
 
-import main.oddfoam.barbarianstaff.BarbarianStaff;
-import main.oddfoam.barbarianstaff.player.StaffInventory;
+import main.oddfoam.barbarianstaff.player.staff.StaffManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import java.util.UUID;
-
 public class Invincible implements Listener {
 
-    private StaffInventory staffInventory;
+    private StaffManager staffManager;
 
-    public Invincible(StaffInventory staffInventory) {
-        this.staffInventory = staffInventory;
+    public Invincible(StaffManager staffManager) {
+        this.staffManager = staffManager;
     }
 
     @EventHandler
@@ -25,7 +22,7 @@ public class Invincible implements Listener {
 
             Player player = (Player) e.getEntity();
 
-            if (staffInventory.isInStaffMode(player)) {
+            if (staffManager.isInStaffMode(player)) {
 
                 if (e.getDamager() instanceof Player) {
 

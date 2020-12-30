@@ -1,4 +1,4 @@
-package main.oddfoam.barbarianstaff.util;
+package main.oddfoam.barbarianstaff.util.items;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

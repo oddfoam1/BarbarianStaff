@@ -1,26 +1,24 @@
-package main.oddfoam.barbarianstaff.listener;
+package main.oddfoam.barbarianstaff.listener.item;
 
-import main.oddfoam.barbarianstaff.player.StaffInventory;
+import main.oddfoam.barbarianstaff.player.staff.StaffManager;
 import main.oddfoam.barbarianstaff.util.CC;
-import main.oddfoam.barbarianstaff.util.StaffItems;
+import main.oddfoam.barbarianstaff.util.items.StaffItems;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomTeleport implements Listener {
 
-    private StaffInventory staffInventory;
+    private StaffManager staffManager;
 
-    public RandomTeleport(StaffInventory staffInventory) {
-        this.staffInventory = staffInventory;
+    public RandomTeleport(StaffManager staffManager) {
+        this.staffManager = staffManager;
     }
 
     @EventHandler
@@ -30,7 +28,7 @@ public class RandomTeleport implements Listener {
 
         Player player = event.getPlayer();
 
-        if (staffInventory.isInStaffMode(player)) {
+        if (staffManager.isInStaffMode(player)) {
 
             if (player.getItemInHand().getType() == StaffItems.RANDOM_TELEPORT_ITEM.getType()) {
                 if (player.getItemInHand().hasItemMeta()) {

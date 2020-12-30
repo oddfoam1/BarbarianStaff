@@ -1,25 +1,22 @@
-package main.oddfoam.barbarianstaff.player;
+package main.oddfoam.barbarianstaff.player.staff;
 
 import main.oddfoam.barbarianstaff.util.CC;
-import main.oddfoam.barbarianstaff.util.StaffItems;
+import main.oddfoam.barbarianstaff.util.Mode;
+import main.oddfoam.barbarianstaff.util.items.StaffItems;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class StaffInventory {
+public class StaffManager {
 
     private HashMap<UUID, ItemStack[]> playerItems = new HashMap<>();
 
-    public ArrayList<UUID> sm = new ArrayList<>();
-
-
+    public HashMap<UUID, StaffHandler> sm = new HashMap<>();
 
     public void staffMode(Player player) {
 
@@ -38,45 +35,53 @@ public class StaffInventory {
 
             for (Player p : Bukkit.getOnlinePlayers()) {
 
-                if (p.hasPermission("barbarianstaff.command")) {
+                if (sm.containsKey(p.getUniqueId())) {
+                    if (sm.get(p.getUniqueId()).getMode() == Mode.STAFF || sm.get(p.getUniqueId()).getMode() == Mode.ADMIN) {
 
-                    player.showPlayer(p);
+                        player.showPlayer(p);
 
-                } else {
-                    p.hidePlayer(player);
+                    } else {
+                        p.hidePlayer(player);
+
+                    }
 
                 }
 
-
-             }
+            }
 
             player.sendMessage(CC.chat("&ayou have entered staff mode."));
 
 
         } else {
-
             if (isInStaffMode(player)) {
-
                 removePlayer(player);
             }
         }
 
-
     }
 
     public void addPlayer(Player player) {
-        sm.add(player.getUniqueId());
-
-
+        sm.put(player.getUniqueId(), new StaffHandler(player.getUniqueId(), true));
     }
+
+    public StaffHandler getPlayer(UUID uuid) {
+
+        StaffHandler staffHandler = null;
+
+        if (sm.containsKey(uuid)) {
+            staffHandler = sm.get(uuid);
+        }
+        return staffHandler;
+    }
+
 
     public boolean isInStaffMode(Player player) {
 
-        return sm.contains(player.getUniqueId());
+        return sm.containsKey(player.getUniqueId());
     }
 
     public void removePlayer(Player player) {
-        if (sm.contains(player.getUniqueId())) {
+        if (sm.containsKey(player.getUniqueId())) {
             sm.remove(player.getUniqueId());
             for (Player p : Bukkit.getOnlinePlayers()) {
                 p.showPlayer(player);
@@ -107,15 +112,20 @@ public class StaffInventory {
         return items;
     }
 
-    public void setPlayerItems(Player player) {
+    public HashMap<UUID, StaffHandler> getStaff() {
 
+        return sm;
+    }
+
+    public void setPlayerItems(Player player) {
         player.getInventory().setItem(0, StaffItems.RANDOM_TELEPORT_ITEM);
         player.getInventory().setItem(1, StaffItems.EXAMINE_ITEM);
         player.getInventory().setItem(3, StaffItems.FOLLOW_ITEM);
         player.getInventory().setItem(5, StaffItems.FREEZE_ITEM);
         player.getInventory().setItem(7, StaffItems.STAFF_ONLINE_ITEM);
         player.getInventory().setItem(8, StaffItems.PUSH_FORWARD_ITEM);
-
     }
+
+
 
 }

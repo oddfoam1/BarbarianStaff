@@ -1,6 +1,6 @@
 package main.oddfoam.barbarianstaff.command;
 
-import main.oddfoam.barbarianstaff.player.StaffInventory;
+import main.oddfoam.barbarianstaff.player.staff.StaffManager;
 import main.oddfoam.barbarianstaff.util.CC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,10 +9,10 @@ import org.bukkit.entity.Player;
 
 public class StaffCommand implements CommandExecutor {
 
-    private StaffInventory staffInventory;
+    private StaffManager staffManager;
 
-    public StaffCommand(StaffInventory staffInventory) {
-        this.staffInventory = staffInventory;
+    public StaffCommand(StaffManager staffManager) {
+        this.staffManager = staffManager;
     }
 
 
@@ -24,8 +24,8 @@ public class StaffCommand implements CommandExecutor {
 
             if (cmd.getName().equalsIgnoreCase("staffmode")) {
                 if (args.length == 0) {
-                    if (player.hasPermission("barbarianstaff.command") | player.isOp()) {
-                        staffInventory.staffMode(player);
+                    if (player.hasPermission("barbarianstaff.command") || player.isOp()) {
+                        staffManager.staffMode(player);
                         return true;
                     } else {
 

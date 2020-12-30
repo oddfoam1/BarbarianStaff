@@ -1,13 +1,8 @@
-package main.oddfoam.barbarianstaff.util;
+package main.oddfoam.barbarianstaff.util.items;
 
 import main.oddfoam.barbarianstaff.util.CC;
-import main.oddfoam.barbarianstaff.util.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class StaffItems {
 
